@@ -1,0 +1,103 @@
+:root{
+  --bg:#ffffff;
+  --ink:#23252A;
+  --muted:#5f6470;
+  --rule:#d9dbe1;
+  --accent:#6b6fe3;
+  --accent-dark:#4b4fd4;
+}
+*{box-sizing:border-box}
+html,body{height:100%;}
+body{margin:0;background:#f3f4f7;color:var(--ink);font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;}
+
+/* toolbar */
+.toolbar{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;background:#0f1222;color:#fff;padding:10px 12px;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.toolbar .btn{margin-right:8px}
+.toolbar .btn:last-child{margin-right:0}
+
+/* buttons */
+.btn{appearance:none;border:1px solid #d0d3da;background:#fff;color:#222;padding:8px 12px;border-radius:8px;font-weight:600;cursor:pointer}
+.btn:hover{background:#f6f7fb}
+.btn-primary{background:var(--accent);border-color:var(--accent-dark);color:#fff}
+.btn-primary:hover{background:var(--accent-dark)}
+.btn-ghost{background:transparent;border-color:#c5c7cf}
+
+/* editor */
+.editor{position:fixed;right:12px;top:60px;bottom:12px;width:380px;background:#fff;border:1px solid #d8dbe3;border-radius:12px;box-shadow:0 10px 30px rgba(21,23,33,.12);overflow:auto;padding:16px}
+.editor-header{position:sticky;top:0;background:#fff;padding:8px 0;border-bottom:1px solid #eee;z-index:1}
+.editor h3{margin:8px 0 0}
+.editor section{margin:14px 0}
+.editor .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.editor label{display:flex;flex-direction:column;font-size:12px;color:#4b4f5c;gap:6px}
+.editor input,.editor textarea{border:1px solid #cfd3dd;border-radius:8px;padding:10px 12px;font:inherit}
+.editor .muted{color:#727686;font-size:12px;margin-top:-4px}
+.editor .editor-actions{display:flex;gap:8px;justify-content:flex-end}
+.experience-editor{display:grid;gap:10px}
+.role-editor{border:1px dashed #c9ccda;border-radius:10px;padding:10px}
+.role-editor .grid{grid-template-columns:1fr 1fr}
+.role-editor input,.role-editor textarea{width:100%}
+
+/* A4 page sizing */
+.page{width:210mm;height:297mm;margin:20px auto;background:var(--bg);box-shadow:0 10px 40px rgba(28,26,38,.18);border-radius:8px;}
+.page-inner{position:relative;padding:18mm 14mm 16mm 14mm;}
+/* top accent bar like the design */
+.page-inner::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:var(--accent)}
+
+/* header */
+.resume-header h1{margin:0;color:#2b2e44;font-size:34px;letter-spacing:1px;font-weight:800}
+.resume-header h2{margin:6px 0 12px 0;font-size:14px;font-weight:700;color:#6e7385}
+.header-rule{height:4px;background:#e9eaf1;border-radius:2px}
+
+/* columns */
+.columns{display:grid;grid-template-columns:260px 1fr;gap:22px;margin-top:12px}
+.sidebar .block{margin-bottom:18px}
+.block-title{font-size:13px;letter-spacing:1.2px;font-weight:800;color:#2b2e44}
+.rule{height:1px;background:var(--rule);margin:6px 0 10px 0}
+
+.icon-list{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.icon{display:inline-block;width:18px}
+.icon-list .wrap{word-break:break-all}
+
+.dot-list{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+.dot-list li{position:relative;padding-left:12px}
+.dot-list li::before{content:"";position:absolute;left:0;top:.65em;width:5px;height:5px;border-radius:50%;background:#2f3247}
+
+.reference{font-size:12px;display:grid;gap:4px;color:#333}
+
+/* main timeline */
+.main{padding-right:8px}
+.timeline{position:relative;padding-left:22px}
+.timeline::before{content:"";position:absolute;left:9px;top:0;bottom:4px;width:2px;background:#d6d8e2}
+.timeline-title{display:flex;align-items:center;gap:10px}
+.timeline-title .dot{width:9px;height:9px;border:2px solid #2f3247;border-radius:50%;background:#fff;margin-left:-22px}
+
+.block{margin-bottom:18px}
+
+#profile{color:var(--muted);font-weight:500;line-height:1.5;margin-top:8px}
+.muted{color:var(--muted)}
+
+.role{margin:12px 0}
+.role-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.company{font-weight:700}
+.position{font-size:12px;color:#555;margin-top:2px}
+.range{font-weight:700;color:#444}
+.badge{background:linear-gradient(90deg,#5d62df,#8a6ddf);color:#fff;font-weight:800;font-size:11px;padding:6px 10px;border-radius:6px}
+.role ul{margin:8px 0 0 0;padding-left:18px}
+.role ul li{margin:6px 0}
+
+/* education */
+.edu{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.degree{font-weight:800}
+.school{color:#555}
+
+/* print */
+@media print{
+  body{background:#fff}
+  .no-print{display:none !important}
+  .page{margin:0;box-shadow:none;border-radius:0;page-break-after:always}
+  .page-inner{padding:16mm 12mm}
+}
+
+/* Utilities */
+.no-print{ }
+.hide{display:none !important}

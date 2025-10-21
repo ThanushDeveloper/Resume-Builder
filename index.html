@@ -1,1 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modern A4 Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Controls (hidden on print) -->
+    <div class="toolbar no-print">
+      <div class="toolbar-left">
+        <button id="toggleEditor" class="btn">Edit Details</button>
+      </div>
+      <div class="toolbar-right">
+        <button id="downloadPdf" class="btn btn-primary">Download PDF</button>
+      </div>
+    </div>
 
+    <!-- Editor panel (hidden on print) -->
+    <aside id="editor" class="editor no-print" aria-label="Resume editor" hidden>
+      <header class="editor-header">
+        <h3>Resume Details</h3>
+      </header>
+      <form id="resumeForm">
+        <section>
+          <h4>Header</h4>
+          <div class="grid">
+            <label>Full Name<input name="name" type="text" /></label>
+            <label>Role / Title<input name="title" type="text" /></label>
+          </div>
+        </section>
+        <section>
+          <h4>Contact</h4>
+          <div class="grid">
+            <label>Phone<input name="phone" type="text" /></label>
+            <label>Email<input name="email" type="email" /></label>
+            <label>Location<input name="location" type="text" /></label>
+            <label>Website<input name="website" type="text" /></label>
+          </div>
+        </section>
+        <section>
+          <h4>Profile</h4>
+          <label>Summary<textarea name="profile" rows="4"></textarea></label>
+        </section>
+        <section>
+          <h4>Skills (one per line)</h4>
+          <label><textarea name="skills" rows="8"></textarea></label>
+        </section>
+        <section>
+          <h4>Languages (one per line)</h4>
+          <label><textarea name="languages" rows="4"></textarea></label>
+        </section>
+        <section>
+          <h4>Reference</h4>
+          <div class="grid">
+            <label>Name<input name="ref_name" type="text" /></label>
+            <label>Company & Role<input name="ref_role" type="text" /></label>
+            <label>Phone<input name="ref_phone" type="text" /></label>
+            <label>Email<input name="ref_email" type="email" /></label>
+          </div>
+        </section>
+        <section>
+          <h4>Education</h4>
+          <div class="grid">
+            <label>Degree<input name="edu_degree" type="text" /></label>
+            <label>School<input name="edu_school" type="text" /></label>
+          </div>
+          <div class="grid">
+            <label>Years<input name="edu_years" type="text" /></label>
+          </div>
+        </section>
+        <section>
+          <h4>Experience</h4>
+          <p class="muted">Add up to 6 roles. Empty rows are ignored.</p>
+          <div id="experienceList" class="experience-editor"></div>
+          <div class="editor-actions">
+            <button type="button" id="addExperience" class="btn btn-ghost">+ Add Role</button>
+          </div>
+        </section>
+        <div class="editor-actions">
+          <button type="reset" class="btn">Reset</button>
+          <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+      </form>
+    </aside>
+
+    <!-- A4 page -->
+    <main class="page" id="resume">
+      <div class="page-inner">
+        <!-- Header -->
+        <header class="resume-header">
+          <h1 id="name">AHMDD SAAH</h1>
+          <h2 id="title">MARKETING MANAGER</h2>
+          <div class="header-rule"></div>
+        </header>
+
+        <div class="columns">
+          <!-- Sidebar -->
+          <aside class="sidebar">
+            <section class="block">
+              <h3 class="block-title">CONTACT</h3>
+              <div class="rule"></div>
+              <ul class="icon-list" id="contactList">
+                <li><span class="icon">☎</span><span id="phone">+124-4236-7894</span></li>
+                <li><span class="icon">✉</span><span id="email">hello@ahmedd saaahh.com</span></li>
+                <li><span class="icon">📍</span><span id="location">123dfdfgdg, Any City</span></li>
+                <li class="wrap"><span class="icon">🌐</span><span id="website">www.ahmedd saaahh com</span></li>
+              </ul>
+            </section>
+
+            <section class="block">
+              <h3 class="block-title">SKILLS</h3>
+              <div class="rule"></div>
+              <ul class="dot-list" id="skillsList">
+                <li>Strategic Planning</li>
+                <li>Problem Solving</li>
+                <li>Crisis Management</li>
+                <li>Creative Thinking</li>
+                <li>Data Analysis</li>
+                <li>Brand Development</li>
+                <li>Negotiation</li>
+                <li>Customer Orientation</li>
+                <li>Adaptability to Change</li>
+              </ul>
+            </section>
+
+            <section class="block">
+              <h3 class="block-title">LANGUAGES</h3>
+              <div class="rule"></div>
+              <ul class="dot-list" id="languagesList">
+                <li>English (Fluent)</li>
+              </ul>
+            </section>
+
+            <section class="block">
+              <h3 class="block-title">REFERENCE</h3>
+              <div class="rule"></div>
+              <div class="reference">
+                <div id="ref_name">Estelle Darcy</div>
+                <div id="ref_role">Wardiere Inc. / CTO</div>
+                <div>Phone: <span id="ref_phone">+124-4236-7894</span></div>
+                <div>Email : <span id="ref_email">hello@ahmedd saaahh.com</span></div>
+              </div>
+            </section>
+          </aside>
+
+          <!-- Main content -->
+          <section class="main">
+            <div class="timeline">
+              <section class="block">
+                <div class="timeline-title">
+                  <div class="dot"></div>
+                  <h3 class="block-title">PROFILE</h3>
+                </div>
+                <p id="profile">"Neimo ensiont est atem Aham ipsum, finifiam imbo sido. Intum lumina parco regia Aham extra mola idis. Commado Aham antepor yumo finiam carus, domus serim lacur Aham. Mauris solutido Aham in alibadis, ceras vita Aham elit exidio leo, adipiscit sector elit."</p>
+              </section>
+
+              <section class="block">
+                <div class="timeline-title">
+                  <div class="dot"></div>
+                  <h3 class="block-title">WORK EXPERIENCE</h3>
+                </div>
+
+                <div id="experience">
+                  <!-- One role -->
+                  <article class="role">
+                    <div class="role-header">
+                      <div>
+                        <div class="company">Borcelle Studio</div>
+                        <div class="position">Marketing Manager & Specialist</div>
+                      </div>
+                      <div class="badge">2030 - PRESENT</div>
+                    </div>
+                    <ul>
+                      <li>Formulate and implement detailed marketing strategies and initiatives that support the company's mission and objectives.</li>
+                      <li>Guide, inspire, and oversee a dynamic marketing team, promoting a collaborative and performance-oriented culture.</li>
+                      <li>Ensure uniformity of the brand across all marketing platforms and materials.</li>
+                    </ul>
+                  </article>
+
+                  <article class="role">
+                    <div class="role-header">
+                      <div>
+                        <div class="company">Fbuget Studio</div>
+                        <div class="position">Marketing Manager & Specialist</div>
+                      </div>
+                      <div class="range">2025 - 2029</div>
+                    </div>
+                    <p class="muted">"Neimo ensiont est atem Aham ipsum, finifiam imbo sido. Intum lumina parco regia Aham extra mola idis. Commado Aham antepor yumo finiam carius, domus serim lacur Aham. Mauris solutido Aham in alibadis, ceras vita Aham elit exidio leo, adipiscit sector elit."</p>
+                  </article>
+
+                  <article class="role">
+                    <div class="role-header">
+                      <div>
+                        <div class="company">Studio Showdoe</div>
+                        <div class="position">Marketing Manager & Specialist</div>
+                      </div>
+                      <div class="range">2024 - 2025</div>
+                    </div>
+                    <ul>
+                      <li>Formulate and implement detailed marketing strategies and initiatives that support the company's mission and objectives. Guide, inspire, and oversee a dynamic marketing team, promoting a collaborative and performance-oriented culture. Ensure uniformity of the brand across all marketing platforms and materials.</li>
+                    </ul>
+                  </article>
+                </div>
+
+                <section class="block">
+                  <div class="timeline-title">
+                    <div class="dot"></div>
+                    <h3 class="block-title">EDUCATION</h3>
+                  </div>
+                  <div class="edu">
+                    <div>
+                      <div class="degree" id="edu_degree">Master of Business Management</div>
+                      <div class="school" id="edu_school">School of business | Wardiere University</div>
+                    </div>
+                    <div class="range" id="edu_years">2029 - 2031</div>
+                  </div>
+                </section>
+              </section>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
