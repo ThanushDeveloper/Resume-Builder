@@ -1,1 +1,304 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Resume Builder</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f3f3f3;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.form-container {
+  flex: 1 1 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 100%;
+}
+
+.form-container input, .form-container textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-container button {
+  background: #008000;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.resume {
+  flex: 2 1 500px;
+  background: white;
+  border: 3px solid #008000;
+  padding: 20px 30px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  min-width: 300px;
+  max-width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #008000;
+  padding-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.header img {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+.name {
+  font-size: 26px;
+  font-weight: bold;
+  color: #004d00;
+}
+
+.contact p {
+  margin: 2px 0;
+  font-size: 14px;
+}
+
+.section {
+  margin-top: 18px;
+}
+
+.section h2 {
+  background: #008000;
+  color: white;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.section p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.right {
+  float: right;
+  color: #333;
+  font-size: 13px;
+}
+
+.btn {
+  background: #008000;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+  font-size: 14px;
+}
+
+@media print {
+  .form-container, .btn { display: none; }
+  body { background: white; }
+  .resume { border: none; }
+}
+
+/* Responsive for Mobile Devices */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 10px;
+  }
+  .form-container, .resume {
+    width: 100%;
+    padding: 15px;
+  }
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header img {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  .name {
+    font-size: 22px;
+  }
+  .section h2 {
+    font-size: 15px;
+    padding: 4px 8px;
+  }
+  .section p {
+    font-size: 14px;
+  }
+  .form-container input, .form-container textarea, .form-container button {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  .form-container, .resume {
+    padding: 10px;
+  }
+  .header img {
+    width: 80px;
+    height: 80px;
+  }
+  .name {
+    font-size: 20px;
+  }
+  .section h2 {
+    font-size: 14px;
+    padding: 3px 6px;
+  }
+  .section p {
+    font-size: 13px;
+  }
+  .form-container input, .form-container textarea, .form-container button {
+    font-size: 13px;
+    padding: 6px;
+  }
+  html, body, .container {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="form-container">
+    <h3>Enter Resume Details</h3>
+    <input id="name" placeholder="Full Name">
+    <input id="address" placeholder="Address">
+    <input id="phone" placeholder="Phone">
+    <input id="email" placeholder="Email">
+    <input id="website" placeholder="Website">
+    <input type="file" id="photo" accept="image/*">
+    <textarea id="summary" placeholder="Summary"></textarea>
+    <textarea id="experience" placeholder="Work Experience (use line breaks)"></textarea>
+    <textarea id="education" placeholder="Education (use line breaks)"></textarea>
+    <textarea id="skills" placeholder="Additional Information (use line breaks)"></textarea>
+    <button onclick="fillSample()">Fill Sample</button>
+    <button onclick="updateResume()">Generate Resume</button>
+  </div>
+
+  <div class="resume" id="resume">
+    <div class="header">
+      <img id="rphoto" src="https://via.placeholder.com/100" alt="Profile Photo">
+      <div>
+        <div class="name" id="rname">Your Name</div>
+        <div class="contact">
+          <p><b>Address:</b> <span id="raddress"></span></p>
+          <p><b>Phone:</b> <span id="rphone"></span></p>
+          <p><b>Email:</b> <span id="remail"></span></p>
+          <p><b>Website:</b> <span id="rwebsite"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>SUMMARY</h2>
+      <p id="rsummary"></p>
+    </div>
+
+    <div class="section">
+      <h2>WORK EXPERIENCE</h2>
+      <p id="rexperience"></p>
+    </div>
+
+    <div class="section">
+      <h2>EDUCATION</h2>
+      <p id="reducation"></p>
+    </div>
+
+    <div class="section">
+      <h2>ADDITIONAL INFORMATION</h2>
+      <p id="rskills"></p>
+    </div>
+  </div>
+</div>
+
+<button class="btn" onclick="window.print()">Download PDF</button>
+
+<script>
+function updateResume() {
+  document.getElementById("rname").innerText = document.getElementById("name").value;
+  document.getElementById("raddress").innerText = document.getElementById("address").value;
+  document.getElementById("rphone").innerText = document.getElementById("phone").value;
+  document.getElementById("remail").innerText = document.getElementById("email").value;
+  document.getElementById("rwebsite").innerText = document.getElementById("website").value;
+  document.getElementById("rsummary").innerText = document.getElementById("summary").value;
+  document.getElementById("rexperience").innerHTML = document.getElementById("experience").value.replace(/\n/g, "<br>");
+  document.getElementById("reducation").innerHTML = document.getElementById("education").value.replace(/\n/g, "<br>");
+  document.getElementById("rskills").innerHTML = document.getElementById("skills").value.replace(/\n/g, "<br>");
+}
+
+function fillSample() {
+  document.getElementById("name").value = "BENJAMIN SHAH";
+  document.getElementById("address").value = "123 Anywhere St., Any City";
+  document.getElementById("phone").value = "123-456-7890";
+  document.getElementById("email").value = "hello@reallygreatsite.com";
+  document.getElementById("website").value = "www.reallygreatsite.com";
+  document.getElementById("summary").value = "Results-oriented Mechanical and Mechatronics Engineer seeking a challenging position to apply expertise in designing and implementing innovative solutions for complex engineering challenges.";
+  document.getElementById("experience").value = 
+  "Mechatronics Engineer, Borcelle Technologies (Jan 2023 - Present)\n• Led development of advanced automation systems, achieving a 15% increase in efficiency.\n• Reduced production costs by 10%.\n\nSystem Engineer, Arrowai Industries (Feb 2021 - Dec 2022)\n• Designed and optimized robotic systems, improving performance by 12%.\n• Ensured compliance with industry standards.\n\nJunior Project Engineer, Salford & Co Manufacturing (Mar 2020 - Jan 2021)\n• Managed automation projects end-to-end.\n• Improved client satisfaction by 25%";
+  document.getElementById("education").value = 
+  "Bachelor of Mechatronics Engineering with Honours (Aug 2016 - Oct 2019)\nUniversity of Engineering Excellence\n\nDiploma in Mechanical Engineering (May 2014 - May 2016)\nEngineering University";
+  document.getElementById("skills").value = 
+  "Technical Skills: Mechatronics Systems, CAD, Robotics, Automation.\nLanguages: English, Malay, Japanese.\nCertificates: Project Management Professional (PMP).";
+  updateResume();
+}
+
+document.getElementById("photo").addEventListener("change", function(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById("rphoto").src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+</script>
+
+</body>
+</html>
+
